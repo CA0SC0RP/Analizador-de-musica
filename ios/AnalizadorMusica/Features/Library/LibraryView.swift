@@ -286,7 +286,8 @@ private struct FrequencySummaryPanel: View {
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(StudioTheme.muted)
             }
-            ForEach(bands, id: \.0) { band in
+            ForEach(0..<bands.count, id: \.self) { index in
+                let band = bands[index]
                 HStack(spacing: 9) {
                     Text(band.0)
                         .font(.system(size: 9, weight: .bold, design: .monospaced))
