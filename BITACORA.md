@@ -1,5 +1,14 @@
 # Bitácora del proyecto
 
+## 2026-11-02 — Carpeta privada de muestras MP3
+
+- Se creó `samples/reference-audio/` para alojar localmente hasta tres MP3 de referencia en el entorno privado de pruebas.
+- Se añadió un README con instrucciones y un `.gitignore` que excluye MP3 y formatos de audio habituales.
+- El repositorio es público: no subir canciones mediante la web de GitHub ni incluirlas en commits. `.gitignore` protege las operaciones Git locales, pero no bloquea una carga manual desde la interfaz web.
+- Se actualizó `docs/PRUEBAS_MP3.md` con el destino y las precauciones de privacidad.
+- Los archivos de audio aún no han sido aportados ni procesados.
+
+
 ## 2026-11-02 — Apple Music Understanding pasa a primera opción de evaluación
 
 - Se revisó la documentación oficial y la sesión WWDC26 de Apple.
