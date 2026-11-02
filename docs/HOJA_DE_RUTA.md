@@ -1,48 +1,66 @@
-# Hoja de ruta
+# Hoja de ruta V1
 
-La experiencia iPad y la calidad visual son requisitos centrales, no una fase cosmética al final. La exportación organizada de MP3 originales también forma parte del flujo principal. Cada etapa requiere implementación y evidencia de pruebas.
+La Biblioteca y el entorno visual son el centro del producto. El motor analítico debe integrarse en una experiencia coherente y fácil de trabajar; no se considerará suficiente que el programa simplemente escanee archivos.
 
-| Fase | Objetivo | Criterio de salida |
+## Secuencia de trabajo
+
+| Etapa | Trabajo | Criterio de salida |
 |---|---|---|
-| 0. Definición | Alcance, límites, bitácora y decisiones | Documentación revisada |
-| 1. Auditoría técnica iPad | Evaluar stack, bibliotecas, licencias, rendimiento, archivos locales y distribución de prueba | Decisión técnica justificada |
-| 2. Dirección visual y navegación | Diseñar sistema visual oscuro, denso en información útil, navegación y vistas de análisis | Prototipo visual navegable aprobado en iPad |
-| 3. Biblioteca local | Importación/acceso seguro a MP3, cola, almacenamiento y persistencia | Importar lotes, reanudar y conservar análisis |
-| 4. Análisis esencial | BPM, beats, tonalidad, modo, Camelot y metadatos técnicos | Resultados comparables y medibles |
-| 5. Estructura musical | Segmentación, breaks, drops, entradas y evolución | Timeline con timestamps y confianza |
-| 6. Visualización | Energy Map, Waveform, Spectrogram y Frequency Analysis | Vistas dedicadas, interactivas y vinculadas al tiempo |
-| 7. Expediente de pista | Ficha modular con navegación a subventanas | Cada botón abre vista funcional y conserva contexto |
-| 8. Etiquetas ID3 | Detección, propuesta, revisión y escritura autorizada | Preservación del flujo de audio y reversión de tags |
-| 9. Compatibilidad | Motor explicable armónico, rítmico, estructural y energético | Comparaciones justificadas |
-| 10. Exportación organizada | Copiar MP3 a carpetas por tonalidad/Camelot y grupos compatibles | Archivos exportados conservan el audio original; hash verificado, sin recodificación ni sobrescritura accidental |
-| 11. Metadatos externos | Identificación y créditos con fuentes y confianza | Resolver coincidencias ambiguas con seguridad |
-| 12. DJ sets | Búsqueda de sesiones y tracklists públicos | Resultados con fuentes, enlaces y certeza |
-| 13. Estudio de transiciones | Análisis de secuencia y transiciones verificables | Informe por transición con evidencia |
-| 14. Calidad y entrega | Rendimiento, pruebas en iPad, accesibilidad táctil, documentación y distribución de prueba | Versión funcional verificable |
+| 0. Consolidación | Alcance, decisiones, bitácora y límites V1 | Documentación coherente |
+| 1. Fundamento visual | SwiftUI, tema, navegación, componentes y layout adaptativo | App shell y Biblioteca navegables |
+| 2. Biblioteca funcional | Importación, lista, selección, estados y persistencia inicial | Selección y actualización contextual verificables |
+| 3. Reproductor + waveform | Reproducción local y waveform completo | Audio real, seek y waveform sincronizados |
+| 4. Energy Map | Análisis temporal de energía y eventos tentativos | Visualización con timestamps y confianza |
+| 5. Frequency Analysis | FFT/espectro y bandas | Widget compacto y vista expandida |
+| 6. Tonalidad + Camelot | Essentia.js candidato, cromagrama y métodos de contraste | Análisis de pista completa, alternativas y fallos honestos |
+| 7. Compatibilidad + organización | Relaciones armónicas y filtros | Clasificación explicable |
+| 8. Exportación | Copia segura de MP3 originales por carpetas | Integridad, conflictos y reanudación probados |
+| 9. Integración y QA | Rendimiento, accesibilidad, memoria, batería y regresiones | Versión V1 probada en iPad |
 
-## Requisitos del prototipo visual
+## Plan intensivo de siete jornadas (objetivo, no garantía)
 
-- Composición profesional de consola musical para iPad.
-- Alta densidad de información relevante, con jerarquía y legibilidad.
-- Navegación principal clara y persistente.
-- Ficha de pista con accesos a vistas especializadas.
-- Vistas dedicadas de Waveform, Spectrogram, Frequency Analysis, Energy Map, tonalidad, ritmo y estructura.
-- Navegación entre vistas sin perder pista o contexto seleccionado.
-- Controles cómodos para touch y, cuando esté disponible, puntero/teclado.
-- Datos de ejemplo claramente identificados como demostración, no como análisis real.
+1. **Diseño visual y navegación:** sistema visual, Biblioteca, paneles y estados.
+2. **Waveform y reproductor:** reproducción local, transporte y forma de onda integrada.
+3. **Energy Map:** cálculo temporal y visualización.
+4. **Frequency Analysis:** espectro y widget expandible.
+5. **Tonalidad y Camelot:** integración del motor y pruebas completas.
+6. **Compatibilidad y organización:** explicación de relaciones y clasificación.
+7. **Exportación e integración:** copia íntegra, pruebas y correcciones.
 
-## Evaluación técnica pendiente
+Cada jornada exige implementación real y pruebas. Si la precisión o estabilidad no alcanza el criterio de salida, se registra como pendiente; el calendario no justifica declarar terminado un módulo defectuoso.
 
-Tecnologías candidatas, no decisiones definitivas:
-- Swift / SwiftUI y frameworks nativos de Apple: evaluar como ruta principal para iPad.
-- AVFoundation: lectura y decodificación de audio local, sujeto a pruebas y compatibilidad.
-- Accelerate / vDSP: procesamiento numérico y espectral local, si resulta adecuado.
-- Essentia: evaluar compatibilidad, licencia y viabilidad en iPad.
-- librosa: referencia útil de algoritmos/prototipos; comprobar si conviene en el dispositivo o para validación.
-- aubio: tempo y detección de beats; comprobar soporte y licencia.
-- FFmpeg: evaluar necesidad, licencia y tamaño; evitar una dependencia grande si APIs nativas bastan.
-- MusicBrainz y Discogs: metadatos públicos, sujetos a sus condiciones de uso.
-- Chromaprint: huellas acústicas, si encaja con el caso.
-- Demucs u otras alternativas: estudiar separación de stems solo si aporta valor real; no es requisito central.
+## Reglas del prototipo visual
 
-La selección debe considerar compatibilidad con iPadOS, licencias, CPU/RAM, tamaño, tiempo de análisis, precisión en música electrónica, acceso a archivos, consumo energético, persistencia local y copia/exportación de archivos sin recodificación. No instalar todas las opciones por defecto.
+- La Biblioteca debe verse como un entorno de trabajo completo, no como un formulario de importación.
+- Cabecera de pista, waveform, reproductor, tabla y panel contextual conviven en la misma pantalla.
+- Navegación principal: Biblioteca, Análisis, Tonalidades, Organización y Exportación.
+- Energy Map y Waveform se relacionan en la vista Análisis.
+- Frequency Analysis aparece compacto y se expande a demanda.
+- Datos de demostración deben estar etiquetados como tales y nunca confundirse con análisis real.
+- Touch es prioritario, sin perder compatibilidad con mouse/puntero y teclado.
+- Adaptar layout a orientación y tamaños de iPad.
+- Transiciones discretas, estados claros y rendimiento fluido.
+
+## Evaluación tecnológica
+
+Ruta candidata:
+- Swift / SwiftUI: interfaz nativa iPadOS.
+- AVFoundation: lectura y reproducción local.
+- Accelerate / vDSP: FFT y operaciones numéricas.
+- Essentia.js: candidato principal para tonalidad y análisis musical; probar integración WebAssembly/JavaScript, rendimiento, consumo y licencia AGPL-3.0/opción propietaria antes de distribuir.
+- aubio, librosa y otros motores: referencias o alternativas para validar algoritmos; no agregar dependencias sin necesidad.
+- FFmpeg solo si las APIs nativas no cubren una necesidad real.
+
+Medir compatibilidad iPadOS, CPU/RAM, tamaño, tiempo de análisis de pistas completas, batería, precisión en música electrónica, recuperación de errores y obligaciones de licencia. No contratar servicios ni asumir costes sin autorización.
+
+## Conjunto de pruebas MP3
+
+Solicitar al usuario dos archivos cuando comience la integración del motor:
+1. Una pista completa de techno/minimal techno de buena calidad, preferentemente 320 kbps.
+2. Una pista de otro estilo o estructura musical contrastante.
+
+Usar ambos archivos para importación, metadatos, duración, decodificación, waveform, Energy Map, espectro y tonalidad/Camelot. Añadir posteriormente más muestras y casos difíciles. Los MP3 de prueba no se subirán al repositorio público.
+
+## Criterio de calidad
+
+Por cada módulo: diseño definido → implementación → prueba con audio real → integración → evidencia registrada en bitácora. Distinguir siempre planificado, implementado, compilado, probado y aprobado. No declarar V1 lista solo porque la interfaz o una pantalla de demostración funcione.
