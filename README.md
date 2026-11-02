@@ -51,7 +51,7 @@ La exportación es una función esencial. Copiará los MP3 originales a una carp
 
 ## Tecnología candidata
 
-Ruta principal a evaluar: Swift y SwiftUI para la aplicación nativa; AVFoundation para acceso/reproducción de audio; Accelerate/vDSP para operaciones numéricas y espectrales. Essentia.js es el motor candidato principal para análisis musical, pendiente de pruebas reales de integración, rendimiento en iPadOS y revisión de licencia AGPL-3.0/opción propietaria. No se considera validado hasta superar esas pruebas.
+Ruta principal a evaluar: Swift y SwiftUI para la aplicación nativa; AVFoundation para acceso/reproducción de audio; Accelerate/vDSP para operaciones numéricas y espectrales. **Apple Music Understanding** pasa a ser el primer motor candidato para probar: ofrece análisis local de tonalidad por rangos, estructura, pace, actividad instrumental y loudness. Su documentación indica iPadOS 27.0 o posterior y está marcada como Beta; falta validar compilación y ejecución en el iPad A16. Essentia y librosa quedan como referencias comparativas y alternativas, no como dependencias principales.
 
 No se incorporarán dependencias o servicios de pago sin autorización explícita. Se priorizará procesamiento local.
 
