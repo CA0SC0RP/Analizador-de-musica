@@ -1,81 +1,74 @@
 # Bitácora del proyecto
 
-## 2026-11-02 — Inicio de documentación y definición del alcance
+## 2026-11-02 — Definición inicial y decisiones de alcance
 
 ### Estado del repositorio
 - Repositorio: `CA0SC0RP/Analizador-de-m-sica`
 - URL: https://github.com/CA0SC0RP/Analizador-de-m-sica
-- Rama predeterminada: `main`
-- Visibilidad: pública.
-- Inspección inicial: el repositorio estaba vacío (sin archivos ni código).
-- No hay implementación previa que pueda declararse como terminada o probada.
+- Rama: `main`
+- El repositorio estaba vacío al iniciar la documentación.
+- No hay implementación ni pruebas de audio verificadas todavía.
 
-### Decisiones aprobadas por el usuario
+### Decisiones aprobadas
 
-1. El producto es un **analizador de música**, no una aplicación DJ.
-2. Plataforma objetivo: **iPad desde el inicio**. No se desarrollará primero una aplicación de escritorio para adaptarla después.
-3. La calidad visual y la experiencia de uso son prioridades centrales, al mismo nivel que el motor de análisis.
-4. La interfaz será oscura, profesional y rica en información útil. El usuario sí quiere una presentación visualmente densa cuando todos los datos mostrados sean relevantes; no busca minimalismo vacío.
-5. La navegación será por áreas principales y vistas/subventanas especializadas. Desde una misma ficha o contexto, botones independientes abrirán Waveform, Spectrogram, Frequency Analysis, Energy Map, tonalidad, ritmo, estructura, compatibilidad y DJ Sets. Debe conservarse el contexto y poder volver a la vista anterior.
-6. Su función principal es leer y analizar MP3 locales con profundidad.
-7. Debe aceptar análisis individuales y por lotes de cualquier tamaño práctico.
-8. Cada pista tendrá un expediente detallado y persistente.
-9. Visualizaciones destacadas: Energy Map, Frequency Analysis, Spectrogram y Waveform.
-10. El Energy Map debe mostrar evolución de energía y momentos musicales, incluyendo tonalidad y eventos detectados a lo largo del tiempo.
-11. La tonalidad, Camelot y BPM son importantes, pero la compatibilidad no se limitará a tonalidades idénticas ni a reglas rígidas.
-12. Se estudiarán ritmo, groove, estructura, timbre, energía y transiciones.
-13. Se podrá revisar y corregir ID3; toda escritura en MP3 será opcional, revisable y autorizada.
-14. El programa buscará información pública de canciones, artistas y sellos.
-15. Habrá dos funciones de sets: detectar canciones propias en sesiones publicadas y buscar sets externos para estudiar sus tracklists y transiciones.
-16. Se priorizará música electrónica underground (minimal techno, techno, dark techno, deep house y house), con interés especial en escenas europeas y alemanas. Los sets de otros estilos podrán servir como material de estudio técnico.
-17. El programa no descargará música, no comprará canciones y no accederá a cuentas de Beatport u otras tiendas.
-18. Se usarán fuentes públicas y accesos permitidos; no se hará nada ilegal ni se evadirán restricciones.
-19. El audio original se mantiene intacto durante el análisis.
-20. El usuario prevé probar builds mediante el programa Developer de Apple de siete días. Publicar o pagar distribución será una decisión futura, no un requisito actual.
+1. Producto: analizador de música, no aplicación DJ.
+2. Plataforma: iPad desde el inicio.
+3. La calidad visual es prioritaria. Interfaz oscura, profesional y rica en información útil, con navegación por secciones y subventanas especializadas que conservan el contexto.
+4. Importar y analizar MP3 individualmente o por lotes.
+5. Mantener análisis y metadatos en almacenamiento local; evitar recalcular archivos sin cambios.
+6. Expediente por canción con tonalidad, modo, Camelot, BPM, beatgrid, compás, groove, estructura, Energy Map, Waveform, Spectrogram, Frequency Analysis, características sonoras y calidad técnica.
+7. Energy Map integrado con eventos temporales, tonalidad y cambios de energía.
+8. Compatibilidad explicable y no limitada a tonalidades idénticas ni reglas rígidas de Camelot.
+9. Corrección ID3 asistida; mostrar original y propuesta, y escribir cambios solo con aprobación.
+10. Investigación de información pública de canciones, artistas y sellos.
+11. Dos funciones de DJ sets: encontrar las canciones del usuario en sesiones publicadas y buscar sets para estudiar tracklists y transiciones.
+12. Priorizar minimal techno, techno, dark techno, deep house y house underground, especialmente escenas europeas y alemanas; otros estilos pueden servir para estudiar técnicas de mezcla.
+13. Sin descarga/compra de música ni acceso a cuentas privadas de Beatport u otras tiendas.
+14. Usar fuentes públicas y accesos permitidos, sin evadir restricciones.
+15. **Sí habrá exportación:** una vez analizados los MP3, la aplicación copiará los archivos originales a otra carpeta elegida por el usuario, organizándolos por tonalidad/Camelot y agrupaciones de compatibilidad.
+16. La exportación no convierte ni recodifica: conserva MP3, flujo de audio, bitrate, sample rate y duración. No aplica procesamiento de sonido.
+17. La exportación será copia, no movimiento; los originales permanecen intactos.
+18. Si el usuario aprueba correcciones ID3, estas podrán aplicarse a la copia exportada. Si no, se copia también el metadata original sin cambios.
+19. La aplicación debe prevenir sobrescrituras accidentales y permitir revisar clasificación y conflictos antes de copiar.
+20. Pruebas iniciales mediante el flujo Apple Developer de siete días; publicación de pago solo si se decide más adelante.
 
 ### Exclusiones expresas
 
-- Mastering/remasterización.
-- Ecualización correctiva.
-- Compresión, limitadores y normalización.
-- Restauración de audio.
-- Conversión de formatos.
+- Mastering/remasterización, EQ correctiva, compresión, limitadores, normalización y restauración.
+- Conversión de formatos o recodificación.
 - Exportación de audio procesado.
-- Reproductor DJ, decks, mixer, crossfader o efectos.
-- Compra/descarga de música y acceso a cuentas de tiendas.
-- APIs comerciales obligatorias o gastos sin autorización.
+- Reproductor DJ, decks, mixer, crossfader y efectos.
+- Descarga/compra de música o acceso a cuentas de tiendas.
+- Gastos o APIs comerciales obligatorias sin autorización.
 
 ### Próximas etapas
 
-1. Auditar opciones técnicas para una aplicación nativa o adecuada para iPad, con acceso a archivos locales y procesamiento eficiente.
-2. Comparar bibliotecas de análisis (Essentia, librosa, aubio, FFmpeg y alternativas) según precisión, licencias, rendimiento, requisitos y compatibilidad con iPad.
-3. Definir arquitectura de aplicación, base de datos, cola por lotes y caché de análisis.
-4. Diseñar primero la arquitectura de navegación y el sistema visual de iPad: jerarquía, navegación principal, vistas de análisis, controles táctiles y continuidad del contexto.
-5. Crear prototipo visual navegable con datos de ejemplo antes de completar todos los algoritmos.
-6. Definir modelo de datos y esquema de resultados con procedencia y confianza.
-7. Implementar ingestión MP3 y análisis básico verificable.
-8. Añadir análisis armónico, ritmo y estructura.
-9. Construir visualizaciones Energy Map, Waveform, Spectrogram y Frequency Analysis.
-10. Añadir etiquetas ID3 con revisión y confirmación.
-11. Añadir compatibilidad entre canciones.
-12. Investigar integraciones públicas y permitidas para metadatos y DJ sets.
-13. Implementar detección de canciones en sets y estudio de transiciones.
-14. Añadir pruebas, documentación y distribución de prueba en iPad.
+1. Auditoría técnica para iPad: APIs nativas, bibliotecas, licencias, acceso a archivos y rendimiento.
+2. Diseñar navegación y sistema visual; prototipo navegable aprobado antes de completar algoritmos.
+3. Diseñar almacenamiento local, caché, cola por lotes y gestión de espacio.
+4. Implementar importación MP3 y análisis esencial.
+5. Implementar estructura musical y visualizaciones.
+6. Implementar corrección ID3 segura.
+7. Implementar compatibilidad.
+8. Implementar exportación por tonalidad/Camelot y categorías, con pruebas de identidad binaria del audio.
+9. Investigar fuentes públicas para artistas, tracklists y sets.
+10. Implementar descubrimiento de sets y estudio de transiciones.
+11. Pruebas completas en iPad, documentación y distribución de prueba.
 
 ### Reglas de trabajo
 
-- Mantener esta bitácora actualizada con decisiones, cambios y evidencia.
-- Distinguir siempre entre aprobado, propuesto, implementado y probado.
-- No registrar funciones como completadas sin pruebas.
-- No añadir gastos ni servicios pagos sin autorización explícita.
+- Registrar cada decisión, cambio, implementación y evidencia en esta bitácora.
+- Distinguir aprobado, propuesto, implementado y probado.
+- No declarar una función terminada sin pruebas.
+- No asumir gastos sin autorización explícita.
 - No ampliar el producto hacia mastering o funciones DJ.
-- Preservar archivos originales; respaldar y confirmar cualquier escritura ID3.
-- Evaluar la interfaz visual y la navegación como requisitos funcionales desde el primer prototipo.
-- Ante incertidumbre técnica, documentarla y evaluar opciones antes de adoptar dependencias.
+- Preservar originales; confirmar cambios ID3.
+- La interfaz y la navegación son requisitos funcionales.
+- La exportación copia y organiza; nunca procesa ni convierte el audio.
 
-### Estado al cierre de esta entrada
+### Estado al cierre
 
-**Fase:** definición y documentación inicial.  
-**Implementación:** todavía no iniciada.  
+**Fase:** definición y documentación.  
+**Implementación:** no iniciada.  
 **Pruebas:** ninguna.  
-**Siguiente hito:** auditoría técnica para iPad y prototipo de interfaz/navegación.
+**Siguiente hito:** auditoría técnica iPad y prototipo visual/navegable.
