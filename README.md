@@ -4,9 +4,35 @@ Analizador local de archivos MP3 orientado a música electrónica y al estudio d
 
 ## Propósito
 
-Leer y analizar archivos MP3 sin convertirlos, procesarlos, remasterizarlos ni exportar audio. El programa debe ofrecer un análisis musical profundo, visual e informativo, además de investigar información pública sobre canciones y DJ sets.
+Leer y analizar archivos MP3 sin convertirlos, procesarlos, remasterizarlos ni exportar audio. El programa ofrece análisis musical profundo, visual e informativo, además de investigar información pública sobre canciones y DJ sets.
 
 **No es una aplicación DJ, reproductor de mezcla ni estación de mastering.**
+
+## Plataforma y prioridad de diseño
+
+**La aplicación se diseñará y desarrollará directamente para iPad.** La interfaz no será una adaptación posterior de un programa de escritorio. Se diseñará considerando el tamaño de pantalla, orientación, interacción táctil, navegación y rendimiento del iPad desde el inicio.
+
+La experiencia gráfica es una prioridad central del producto, al mismo nivel que el funcionamiento del motor de análisis. Se busca una consola musical oscura, profesional, atractiva y rica en información.
+
+La interfaz debe ser **densa en información útil**: cuando los datos sean relevantes, deben estar visibles y bien organizados. No se busca una pantalla minimalista ni vacía, pero tampoco una acumulación desordenada de controles. Cada panel, indicador, gráfico y botón debe tener una función clara.
+
+### Navegación por espacios y subventanas
+
+La aplicación se organizará en áreas principales y, dentro de cada una, en vistas de análisis especializadas. La misma canción o contexto podrá abrir distintas vistas sin perder la referencia de dónde se estaba trabajando.
+
+Ejemplo de flujo desde la ficha de una pista:
+- Vista general de la canción.
+- Botón Waveform → vista dedicada a la forma de onda y timeline.
+- Botón Spectrogram → vista dedicada al espectrograma.
+- Botón Frequency Analysis → vista dedicada al análisis espectral.
+- Botón Energy Map → vista de energía, breaks, builds, drops y momentos destacados.
+- Botón Tonalidad → vista armónica, Camelot y evolución tonal.
+- Botón Ritmo → BPM, beatgrid, compás y groove.
+- Botón Estructura → secciones y eventos con timestamps.
+- Botón Compatibilidad → canciones relacionadas y razones de compatibilidad.
+- Botón DJ Sets → sesiones donde aparece esta canción.
+
+Las áreas principales también tendrán accesos directos independientes para Biblioteca, Análisis, Compatibilidad, Camelot, DJ Sets, Descubrimientos y etiquetas ID3. La navegación debe permitir entrar a una sección, profundizar en subventanas y regresar al contexto anterior de forma clara.
 
 ## Alcance aprobado
 
@@ -38,7 +64,6 @@ Estas vistas son herramientas de lectura y análisis, no controles de procesamie
 ## Exclusiones expresas
 
 No se desarrollarán, como parte del alcance actual:
-
 - Mastering o remasterización.
 - Ecualización correctiva.
 - Compresión, limitadores o normalización.
@@ -61,6 +86,7 @@ Los MP3 originales deben permanecer intactos durante el análisis. La única esc
 6. No imponer reglas rígidas de Camelot: evaluar compatibilidad real con armonía, tempo, groove, estructura y energía.
 7. Respetar derechos de autor, términos de plataformas, límites de acceso y fuentes públicas permitidas.
 8. El usuario conserva la decisión final sobre cambios de metadatos y cualquier gasto.
+9. La calidad visual, jerarquía de información y navegación táctil son requisitos de producto, no detalles cosméticos.
 
 ## Estado inicial
 
