@@ -1,114 +1,76 @@
 # Analizador de música
 
-Analizador local de archivos MP3 orientado a música electrónica y al estudio de compatibilidad musical y mezclas DJ.
+Aplicación nativa para iPad que analiza archivos musicales locales y organiza una biblioteca por tonalidad, Camelot y compatibilidad armónica. La experiencia de uso y la calidad visual son prioridades de producto, al mismo nivel que la precisión técnica.
 
-## Propósito
+**No es una aplicación DJ, DAW ni herramienta de mastering.** Incluye un reproductor sencillo para escuchar y revisar canciones, pero no decks, mezcla ni procesamiento de audio.
 
-Leer y analizar archivos MP3 sin convertirlos, procesarlos ni remasterizarlos. El programa ofrece análisis musical profundo, visual e informativo, investiga información pública sobre canciones y DJ sets y organiza los MP3 analizados en carpetas según sus resultados.
+## Objetivo de V1
 
-**No es una aplicación DJ, reproductor de mezcla ni estación de mastering.**
+- Importar MP3 locales individualmente o por lotes.
+- Mantener una biblioteca persistente, con cola, estados, reintentos y análisis incremental.
+- Escuchar la pista seleccionada desde la Biblioteca.
+- Mostrar waveform integrado en la ventana principal.
+- Calcular Energy Map y análisis de frecuencias.
+- Estimar tonalidad, modo mayor/menor, alternativas, confianza y código Camelot.
+- Explicar compatibilidad armónica entre canciones.
+- Organizar y exportar copias de los MP3 originales a carpetas elegidas por el usuario, según tonalidad/Camelot y categorías configurables.
 
-## Plataforma y prioridad de diseño
+## La interfaz es parte esencial del producto
 
-**La aplicación se diseñará y desarrollará directamente para iPad.** La interfaz no será una adaptación posterior de un programa de escritorio. Se diseñará considerando el tamaño de pantalla, orientación, interacción táctil, navegación y rendimiento del iPad desde el inicio.
+La Biblioteca será el centro de trabajo. La pantalla principal combinará:
 
-La experiencia gráfica es una prioridad central, al mismo nivel que el funcionamiento del motor de análisis. Se busca una consola musical oscura, profesional, atractiva y rica en información.
+1. **Cabecera de pista:** título, artista, tonalidad, modo, Camelot y metadatos esenciales.
+2. **Waveform y transporte:** forma de onda amplia, Play/Pause, posición, duración y volumen.
+3. **Biblioteca:** tabla/lista con columnas configurables, filtros, búsqueda y ordenamiento.
+4. **Panel contextual:** metadatos ampliados, compatibilidad y Frequency Analysis compacto expandible.
 
-La interfaz debe ser **densa en información útil**: cuando los datos sean relevantes, deben estar visibles y bien organizados. No se busca una pantalla minimalista ni vacía, pero tampoco una acumulación desordenada de controles. Cada panel, indicador, gráfico y botón debe tener una función clara.
+La navegación principal tendrá Biblioteca, Análisis, Tonalidades, Organización y Exportación. Seleccionar una canción actualizará ficha, waveform y reproductor sin sacar al usuario de la Biblioteca. En Análisis, Waveform y Energy Map compartirán una composición; Frequency Analysis será un widget compacto que podrá expandirse.
 
-### Navegación por espacios y subventanas
+Dirección visual: consola oscura profesional, clara y atractiva, con información útil visible, jerarquía tipográfica, paneles coherentes y controles cómodos. Debe funcionar con touch y también con mouse/puntero y teclado cuando estén disponibles. Las animaciones serán discretas y estarán subordinadas al rendimiento.
 
-La aplicación se organizará en áreas principales y, dentro de cada una, en vistas de análisis especializadas. La misma canción o contexto podrá abrir distintas vistas sin perder la referencia de dónde se estaba trabajando.
+## Alcance V1
 
-Ejemplo de flujo desde la ficha de una pista:
-- Vista general de la canción.
-- Botón Waveform → vista dedicada a la forma de onda y timeline.
-- Botón Spectrogram → vista dedicada al espectrograma.
-- Botón Frequency Analysis → vista dedicada al análisis espectral.
-- Botón Energy Map → vista de energía, breaks, builds, drops y momentos destacados.
-- Botón Tonalidad → vista armónica, Camelot y evolución tonal.
-- Botón Ritmo → BPM, beatgrid, compás y groove.
-- Botón Estructura → secciones y eventos con timestamps.
-- Botón Compatibilidad → canciones relacionadas y razones de compatibilidad.
-- Botón DJ Sets → sesiones donde aparece esta canción.
+- Metadatos ID3 y técnicos: título, artista, álbum, año, género, sello, duración, bitrate, sample rate, canales, códec y tamaño.
+- Reproductor local de escucha y navegación temporal.
+- Waveform generado a partir del audio completo.
+- Energy Map: evolución temporal de energía e intensidad, con eventos solo cuando haya evidencia suficiente.
+- Frequency Analysis: distribución espectral y bandas de subgraves, graves, medios y agudos.
+- Tonalidad estimada, modo, alternativas plausibles, confianza y Camelot.
+- Compatibilidad armónica explicable, sin depender de reglas rígidas.
+- Organización local y exportación segura de copias MP3 originales.
 
-Las áreas principales también tendrán accesos directos independientes para Biblioteca, Análisis, Compatibilidad, Camelot, DJ Sets, Descubrimientos, etiquetas ID3 y Exportación organizada.
+## Fuera de V1
 
-## Alcance aprobado
+BPM como detector, beatgrid, compás y groove; Spectrogram como vista independiente; análisis avanzado de transiciones; separación de stems; búsqueda de DJ sets y coincidencias en sesiones; mastering, EQ correctiva, compresión, normalización, restauración o mejora de audio; decks, mixer, crossfader y efectos DJ; conversión o recodificación de audio; compra o descarga de música.
 
-- Importar y analizar archivos MP3 individualmente o por lotes (por ejemplo, 1, 2, 50 o 100 archivos).
-- Conservar temporalmente los archivos seleccionados dentro del espacio de trabajo de la aplicación, según las reglas de almacenamiento de iPadOS, y guardar los resultados en una base de datos local.
-- Evitar análisis repetidos si el archivo no ha cambiado.
-- Mostrar una ficha detallada por canción con visualizaciones y análisis.
-- Analizar tonalidad, modo, Camelot, BPM, beatgrid, compás, ritmo, groove y estructura.
-- Mostrar Waveform, Spectrogram, Frequency Analysis y Energy Map.
-- Detectar y marcar intro, entrada del beat, bajo, breaks, builds, drops, cambios de energía, outro y otros momentos relevantes, con timestamp y nivel de confianza.
-- Describir rasgos sonoros y posibles efectos/instrumentos cuando el análisis lo permita.
-- Evaluar calidad técnica del archivo sin intentar corregirla.
-- Corregir y administrar etiquetas ID3 mediante propuestas verificables y confirmación antes de escribir cambios.
-- Comparar canciones y explicar compatibilidad armónica, rítmica, estructural y energética.
-- Investigar metadatos públicos de artistas, canciones, sellos y créditos.
-- Buscar DJ sets publicados y detectar canciones de la biblioteca en sus tracklists o grabaciones cuando sea legal y técnicamente posible.
-- Analizar tracklists y transiciones de sets externos, indicando qué está confirmado y qué es inferido.
-- **Exportar los MP3 analizados a otra carpeta, organizados por tonalidad/Camelot y categorías de compatibilidad. La exportación copia los archivos originales sin recodificar ni cambiar de formato.**
-- Mantener bitácora, estado, decisiones y hoja de ruta en GitHub.
+Un BPM ya incluido en metadatos puede mostrarse como dato de origen, pero no se desarrollará un detector BPM en V1.
 
-## Exportación organizada de MP3
+## Exportación de MP3
 
-La exportación es una función esencial del flujo de trabajo, no una exportación de audio procesado. Tras analizar una tanda de canciones, el usuario podrá generar una estructura de carpetas de destino y copiar allí los MP3 correspondientes, organizados por tonalidad, Camelot y criterios de compatibilidad seleccionados.
+La exportación es una función esencial. Copiará los MP3 originales a una carpeta elegida por el usuario, organizados por tonalidad, Camelot y grupos configurables. No moverá ni borrará originales, no decodificará ni recodificará, y no cambiará formato, bitrate, sample rate, volumen ni calidad. Los resultados inciertos irán a revisión. Se evitarán sobrescrituras, se informarán conflictos y se verificará integridad mediante hash cuando sea viable. La base de datos local será independiente de la exportación.
 
-- Los archivos exportados conservan el formato MP3 y el flujo de audio original, sin recodificación.
-- No se cambia bitrate, frecuencia de muestreo, volumen ni calidad de audio.
-- La organización puede usar carpetas por tonalidad y Camelot, además de grupos o categorías armónicas configurables.
-- Las canciones cuya tonalidad no pueda determinarse con confianza irán a una carpeta de revisión/no identificadas.
-- Se evitarán sobrescrituras y colisiones de nombres; se informarán duplicados y conflictos.
-- El usuario elige el destino y confirma la operación.
-- Por seguridad, la exportación será una copia y no moverá ni borrará los originales.
-- Las correcciones ID3 solo se incluirán en la copia exportada si el usuario las aprobó expresamente; de lo contrario, la copia conservará las etiquetas originales.
-- Los análisis y sus resultados permanecen en la base de datos local, independientemente de la exportación.
+## Tecnología candidata
 
-## Visualizaciones principales
+Ruta principal a evaluar: Swift y SwiftUI para la aplicación nativa; AVFoundation para acceso/reproducción de audio; Accelerate/vDSP para operaciones numéricas y espectrales. Essentia.js es el motor candidato principal para análisis musical, pendiente de pruebas reales de integración, rendimiento en iPadOS y revisión de licencia AGPL-3.0/opción propietaria. No se considera validado hasta superar esas pruebas.
 
-- **Energy Map:** evolución de energía y momentos musicales a lo largo de la pista; integra marcas de estructura, tonalidad y eventos relevantes.
-- **Waveform:** amplitud y cambios temporales.
-- **Spectrogram:** distribución de frecuencias a través del tiempo.
-- **Frequency Analysis:** distribución espectral, graves, medios, agudos y características técnicas.
-- **Timeline musical:** eventos con timestamp, BPM, tonalidad y confianza cuando estén disponibles.
+No se incorporarán dependencias o servicios de pago sin autorización explícita. Se priorizará procesamiento local.
 
-Estas vistas son herramientas de lectura y análisis, no controles de procesamiento de audio.
+## Pruebas con audio real
 
-## Exclusiones expresas
+Antes de validar el motor se solicitarán dos MP3 de referencia: una pista de electrónica (preferentemente techno/minimal techno, completa y de buena calidad) y otra pista de estilo o estructura distinta. Se usarán para verificar lectura, duración, metadatos, waveform, energía, espectro y tonalidad/Camelot. Los archivos de prueba no se incluirán en el repositorio público.
 
-No se desarrollarán, como parte del alcance actual:
-- Mastering o remasterización.
-- Ecualización correctiva.
-- Compresión, limitadores o normalización.
-- Restauración o mejora de audio.
-- Conversión de formatos o recodificación.
-- Exportación de audio procesado.
+## Principios de trabajo
 
-Tampoco se incluirán reproductor DJ, decks, mixer, crossfader, efectos de mezcla, descarga de música, compra de canciones ni acceso a cuentas de tiendas.
+- Local-first y sin gastos no autorizados.
+- No alterar los MP3 originales.
+- Separar datos medidos, metadatos incrustados, datos externos e inferencias.
+- Mostrar confianza e incertidumbre; no inventar precisión.
+- No declarar módulos terminados sin pruebas con archivos reales.
+- La interfaz, la navegación y la facilidad de trabajo son requisitos funcionales.
+- El usuario conserva la decisión final.
 
-Los MP3 originales deben permanecer intactos durante el análisis y la exportación. La única escritura de metadatos contemplada es la actualización opcional de etiquetas ID3, siempre con autorización explícita y sin alterar el flujo de audio.
+## Estado
 
-## Principios
+La definición V1 y el primer esqueleto de interfaz SwiftUI se preparan en la rama de fundación. El código inicial no debe considerarse compilado ni probado hasta que se ejecute en Xcode sobre un iPad.
 
-1. Prioridad local, gratuita y sin gastos no autorizados.
-2. El audio original se lee; no se transforma.
-3. La exportación organizada copia el MP3 sin recodificarlo.
-4. Separar datos medidos, estimaciones algorítmicas y datos obtenidos de Internet.
-5. Mostrar confianza, incertidumbre y procedencia.
-6. No afirmar que se identificó un instrumento, efecto, tonalidad o transición cuando la evidencia no lo permita.
-7. No imponer reglas rígidas de Camelot: evaluar compatibilidad real con armonía, tempo, groove, estructura y energía.
-8. Respetar derechos de autor, términos de plataformas, límites de acceso y fuentes públicas permitidas.
-9. El usuario conserva la decisión final sobre cambios de metadatos, exportaciones y cualquier gasto.
-10. La calidad visual, jerarquía de información y navegación táctil son requisitos de producto, no detalles cosméticos.
-
-## Estado inicial
-
-El repositorio se encontraba vacío al iniciar esta documentación. Todavía no hay implementación, pruebas ni análisis de MP3 verificados.
-
-Consulta:
-- [Alcance funcional](docs/ALCANCE_FUNCIONAL.md)
-- [Bitácora](BITACORA.md)
-- [Hoja de ruta](docs/HOJA_DE_RUTA.md)
+Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md)
