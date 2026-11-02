@@ -1,0 +1,12 @@
+# Audio de referencia privado: nunca versionar ni subir al repositorio público
+*.mp3
+*.wav
+*.aiff
+*.aif
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.opus
+*.wma
+*.alac
