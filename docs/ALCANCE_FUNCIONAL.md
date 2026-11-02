@@ -81,7 +81,7 @@ El reproductor integrado solo sirve para escuchar y revisar la pista seleccionad
 - No asignar una tonalidad por defecto cuando el análisis falla; devolver desconocido/ambiguo.
 - Explicar compatibilidad armónica y relaciones, sin tratar Camelot como regla infalible.
 
-Essentia.js es el candidato principal aprobado para evaluación. Su integración, rendimiento y licencia deben validarse antes de fijarlo como dependencia de distribución.
+Apple Music Understanding es el primer motor candidato aprobado para evaluación. La documentación indica iPadOS 27.0 o posterior y está marcada como Beta. Se debe validar compilación y ejecución real en el iPad A16 antes de adoptarlo. Cubre tonalidad por rangos, estructura, pace, actividad instrumental y loudness; no sustituye el waveform ni el análisis espectral propio, y no se usará su salida de ritmo/BPM en V1. Essentia y librosa quedan como motores de comparación/alternativa, no como dependencias principales.
 
 ## 9. Organización y compatibilidad
 
