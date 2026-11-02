@@ -1,6 +1,58 @@
 # Alcance funcional aprobado
 
-## 1. Biblioteca y procesamiento por lotes
+## 1. Plataforma y experiencia de usuario
+
+### Plataforma objetivo
+- Aplicación diseñada y desarrollada directamente para iPad.
+- La interfaz debe adaptarse al tamaño de pantalla y a la interacción táctil del iPad desde el inicio.
+- La elección del stack de implementación se hará en la auditoría técnica, priorizando compatibilidad real con iPad, acceso a archivos locales, rendimiento de análisis y facilidad de pruebas.
+- Se prevé probar versiones de desarrollo mediante el flujo de Developer de Apple de siete días disponible para el usuario. La publicación comercial o distribución de pago queda para una decisión futura independiente.
+
+### Prioridad visual
+La interfaz gráfica es una prioridad principal, al mismo nivel que la capacidad analítica. El resultado debe sentirse como una consola profesional de análisis musical, no como una utilidad básica de detección de BPM.
+
+Dirección visual:
+- Tema oscuro, elegante y profesional.
+- Alta densidad de información útil: gráficos, indicadores, metadatos, métricas, etiquetas y controles visibles cuando aporten valor.
+- Composición ordenada, jerarquía visual clara y tipografía legible.
+- Controles táctiles cómodos y claramente identificables.
+- Paneles y tarjetas con información contextual; evitar espacios vacíos injustificados.
+- No saturar con controles irrelevantes ni mostrar todos los análisis simultáneamente si perjudica la lectura.
+- La densidad deseada es de contenido importante, no de decoración ni ruido visual.
+
+### Navegación por vistas y subventanas
+La aplicación tendrá secciones principales y vistas especializadas dentro de cada sección. Un botón podrá abrir una nueva vista de análisis dedicada, conservando el contexto de la pista, set o elemento que se está estudiando.
+
+Ejemplo desde una ficha de canción:
+- General / resumen.
+- Waveform.
+- Spectrogram.
+- Frequency Analysis.
+- Energy Map.
+- Tonalidad y armonía.
+- BPM, beatgrid y groove.
+- Estructura y momentos.
+- Calidad técnica.
+- Compatibilidad.
+- Información del artista y metadatos externos.
+- DJ Sets relacionados.
+
+Cada botón debe conducir a una pantalla o panel funcional con contenido específico, no ser un control decorativo. Se debe poder profundizar y volver al nivel anterior sin perder la pista seleccionada ni el estado de navegación.
+
+Las áreas principales previstas son:
+1. Biblioteca y cola de análisis.
+2. Expediente / análisis de pista.
+3. Compatibilidad.
+4. Rueda Camelot.
+5. Live Sets encontrados en la biblioteca.
+6. Buscador de DJ sets.
+7. Estudio de transiciones.
+8. Artistas, sellos y descubrimientos.
+9. Etiquetas ID3 y revisión de metadatos.
+
+La navegación puede usar barra lateral, navegación principal persistente, pestañas, paneles y vistas apiladas, según lo que resulte más natural en iPad. No se fija todavía un wireframe definitivo.
+
+## 2. Biblioteca y procesamiento por lotes
 
 - Selección de archivos MP3 locales.
 - Cola de análisis individual y por lotes.
@@ -10,7 +62,7 @@
 - Identificación de cambios de archivo mediante hash y metadatos técnicos para evitar recalcular innecesariamente.
 - No duplicar ni mover archivos originales sin autorización.
 
-## 2. Expediente musical por pista
+## 3. Expediente musical por pista
 
 Cada pista tendrá una ficha navegable con módulos independientes:
 
@@ -55,7 +107,7 @@ Cada pista tendrá una ficha navegable con módulos independientes:
 
 El análisis no debe confundirse con mastering ni con una evaluación subjetiva absoluta de calidad. Un nivel bajo de volumen se informa; no se corrige.
 
-## 3. Corrección de etiquetas ID3
+## 4. Corrección de etiquetas ID3
 
 - Detectar campos vacíos, inconsistentes, duplicados o aparentemente erróneos.
 - Proponer correcciones con fuente, coincidencia y confianza.
@@ -66,7 +118,7 @@ El análisis no debe confundirse con mastering ni con una evaluación subjetiva 
 - Escribir etiquetas únicamente tras confirmación explícita.
 - No alterar el audio ni convertir el archivo.
 
-## 4. Compatibilidad entre canciones
+## 5. Compatibilidad entre canciones
 
 La puntuación debe ser explicable y desglosada en:
 - Compatibilidad armónica.
@@ -79,7 +131,7 @@ La puntuación debe ser explicable y desglosada en:
 
 No asumir que solo funciona la misma tonalidad ni que una relación Camelot garantiza una buena mezcla. Separar compatibilidad teórica, compatibilidad estimada y evidencia observada en sets reales.
 
-## 5. Investigación de canciones y artistas
+## 6. Investigación de canciones y artistas
 
 Consultar fuentes públicas permitidas para enriquecer:
 - Identificación oficial de canción y artista.
@@ -90,7 +142,7 @@ Consultar fuentes públicas permitidas para enriquecer:
 
 Resolver ambigüedades antes de asociar datos. Registrar fuente y confianza.
 
-## 6. DJ sets y sesiones
+## 7. DJ sets y sesiones
 
 ### Encontrar la biblioteca del usuario en sets
 - Buscar tracklists públicos y sets publicados que incluyan canciones de la biblioteca.
@@ -107,22 +159,7 @@ Resolver ambigüedades antes de asociar datos. Registrar fuente y confianza.
 - Desglosar tracklist, BPM, tonalidad, Camelot y transición entre canciones cuando haya datos o audio accesible legalmente.
 - Estimar solapamiento, cambios de tempo y puntos de entrada/salida solo cuando exista evidencia suficiente.
 
-La aplicación no descarga música ni proporciona acceso a tiendas o cuentas privadas. Presenta información pública y enlaces a las plataformas originales. Respetará APIs oficiales, términos, límites y restricciones de acceso.
-
-## 7. Interfaz
-
-Dirección visual: oscura, profesional, informativa y visual. Debe priorizar lectura de datos, navegación rápida y visualizaciones interactivas.
-
-Secciones previstas:
-1. Biblioteca.
-2. Análisis de pista.
-3. Compatibilidad.
-4. Rueda Camelot.
-5. Live Sets encontrados.
-6. Buscador de DJ sets.
-7. Estudio de transiciones.
-8. Artistas, sellos y descubrimientos.
-9. Etiquetas ID3 y revisión de metadatos.
+La aplicación no descarga música ni proporciona acceso a tiendas o cuentas privadas. Presenta información pública y enlaces a las plataformas originales. Respetará APIs oficiales, términos, límites y restricciones.
 
 ## 8. Exclusiones
 
