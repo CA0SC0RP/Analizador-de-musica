@@ -1,5 +1,20 @@
 # Bitácora del proyecto
 
+## 2026-11-02 — Apple Music Understanding pasa a primera opción de evaluación
+
+- Se revisó la documentación oficial y la sesión WWDC26 de Apple.
+- El framework analiza en el dispositivo y sin conexión: tonalidad por rangos, ritmo, estructura, pace, actividad instrumental y loudness.
+- Acepta AVAsset para analizar archivos completos; ofrece resultados temporales y serializables.
+- La disponibilidad documentada es iPadOS 27.0 o posterior. El framework y el ejemplo aparecen como Beta.
+- Apple publica Music Understanding Lab para iOS, iPadOS y macOS.
+- No hay una lista oficial de chips iPad compatibles en la documentación consultada; la ejecución en el iPad A16 queda pendiente de prueba real. No confundir Music Understanding con los requisitos de Apple Intelligence.
+- Decisión: Apple Music Understanding será el primer motor que se prototipa. Essentia/librosa quedan como referencias comparativas y alternativas.
+- El framework no reemplaza waveform ni Frequency Analysis; Pace puede alimentar Energy Map, pero no equivale a LUFS ni a una medida universal de energía.
+- No exponer BPM/beatgrid en V1 aunque el framework pueda devolver ritmo.
+- Se creó `docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md` con compatibilidad, límites, estrategia y criterios de aceptación.
+- No está integrado, compilado ni probado en el iPad. Se requiere Xcode/macOS con el SDK correspondiente para validar.
+
+
 ## 2026-11-02 — Redefinición y reducción del alcance V1
 
 ### Repositorio
