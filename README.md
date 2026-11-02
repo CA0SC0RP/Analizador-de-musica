@@ -73,4 +73,4 @@ Antes de validar el motor se solicitarán dos MP3 de referencia: una pista de el
 
 La definición V1 y el primer esqueleto de interfaz SwiftUI se preparan en la rama de fundación. El código inicial no debe considerarse compilado ni probado hasta que se ejecute en Xcode sobre un iPad.
 
-Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md)
+Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Motor Apple Music Understanding](docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md) · [Carpeta de muestras locales](samples/reference-audio/README.md)
