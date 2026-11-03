@@ -1,74 +1,89 @@
 # Bitácora del proyecto
 
-## 2026-11-02 — Definición inicial y decisiones de alcance
+## 2026-11-02 — Carpeta privada de muestras MP3
 
-### Estado del repositorio
-- Repositorio: `CA0SC0RP/Analizador-de-m-sica`
-- URL: https://github.com/CA0SC0RP/Analizador-de-m-sica
-- Rama: `main`
-- El repositorio estaba vacío al iniciar la documentación.
-- No hay implementación ni pruebas de audio verificadas todavía.
+- Se creó `samples/reference-audio/` para alojar localmente hasta tres MP3 de referencia en el entorno privado de pruebas.
+- Se añadió un README con instrucciones y un `.gitignore` que excluye MP3 y formatos de audio habituales.
+- El repositorio es público: no subir canciones mediante la web de GitHub ni incluirlas en commits. `.gitignore` protege las operaciones Git locales, pero no bloquea una carga manual desde la interfaz web.
+- Se actualizó `docs/PRUEBAS_MP3.md` con el destino y las precauciones de privacidad.
+- Los archivos de audio aún no han sido aportados ni procesados.
 
-### Decisiones aprobadas
 
-1. Producto: analizador de música, no aplicación DJ.
-2. Plataforma: iPad desde el inicio.
-3. La calidad visual es prioritaria. Interfaz oscura, profesional y rica en información útil, con navegación por secciones y subventanas especializadas que conservan el contexto.
-4. Importar y analizar MP3 individualmente o por lotes.
-5. Mantener análisis y metadatos en almacenamiento local; evitar recalcular archivos sin cambios.
-6. Expediente por canción con tonalidad, modo, Camelot, BPM, beatgrid, compás, groove, estructura, Energy Map, Waveform, Spectrogram, Frequency Analysis, características sonoras y calidad técnica.
-7. Energy Map integrado con eventos temporales, tonalidad y cambios de energía.
-8. Compatibilidad explicable y no limitada a tonalidades idénticas ni reglas rígidas de Camelot.
-9. Corrección ID3 asistida; mostrar original y propuesta, y escribir cambios solo con aprobación.
-10. Investigación de información pública de canciones, artistas y sellos.
-11. Dos funciones de DJ sets: encontrar las canciones del usuario en sesiones publicadas y buscar sets para estudiar tracklists y transiciones.
-12. Priorizar minimal techno, techno, dark techno, deep house y house underground, especialmente escenas europeas y alemanas; otros estilos pueden servir para estudiar técnicas de mezcla.
-13. Sin descarga/compra de música ni acceso a cuentas privadas de Beatport u otras tiendas.
-14. Usar fuentes públicas y accesos permitidos, sin evadir restricciones.
-15. **Sí habrá exportación:** una vez analizados los MP3, la aplicación copiará los archivos originales a otra carpeta elegida por el usuario, organizándolos por tonalidad/Camelot y agrupaciones de compatibilidad.
-16. La exportación no convierte ni recodifica: conserva MP3, flujo de audio, bitrate, sample rate y duración. No aplica procesamiento de sonido.
-17. La exportación será copia, no movimiento; los originales permanecen intactos.
-18. Si el usuario aprueba correcciones ID3, estas podrán aplicarse a la copia exportada. Si no, se copia también el metadata original sin cambios.
-19. La aplicación debe prevenir sobrescrituras accidentales y permitir revisar clasificación y conflictos antes de copiar.
-20. Pruebas iniciales mediante el flujo Apple Developer de siete días; publicación de pago solo si se decide más adelante.
+## 2026-11-02 — Apple Music Understanding pasa a primera opción de evaluación
 
-### Exclusiones expresas
+- Se revisó la documentación oficial y la sesión WWDC26 de Apple.
+- El framework analiza en el dispositivo y sin conexión: tonalidad por rangos, ritmo, estructura, pace, actividad instrumental y loudness.
+- Acepta AVAsset para analizar archivos completos; ofrece resultados temporales y serializables.
+- La disponibilidad documentada es iPadOS 27.0 o posterior. El framework y el ejemplo aparecen como Beta.
+- Apple publica Music Understanding Lab para iOS, iPadOS y macOS.
+- No hay una lista oficial de chips iPad compatibles en la documentación consultada; la ejecución en el iPad A16 queda pendiente de prueba real. No confundir Music Understanding con los requisitos de Apple Intelligence.
+- Decisión: Apple Music Understanding será el primer motor que se prototipa. Essentia/librosa quedan como referencias comparativas y alternativas.
+- El framework no reemplaza waveform ni Frequency Analysis; Pace puede alimentar Energy Map, pero no equivale a LUFS ni a una medida universal de energía.
+- No exponer BPM/beatgrid en V1 aunque el framework pueda devolver ritmo.
+- Se creó `docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md` con compatibilidad, límites, estrategia y criterios de aceptación.
+- No está integrado, compilado ni probado en el iPad. Se requiere Xcode/macOS con el SDK correspondiente para validar.
 
-- Mastering/remasterización, EQ correctiva, compresión, limitadores, normalización y restauración.
-- Conversión de formatos o recodificación.
-- Exportación de audio procesado.
-- Reproductor DJ, decks, mixer, crossfader y efectos.
-- Descarga/compra de música o acceso a cuentas de tiendas.
-- Gastos o APIs comerciales obligatorias sin autorización.
 
-### Próximas etapas
+## 2026-11-02 — Redefinición y reducción del alcance V1
 
-1. Auditoría técnica para iPad: APIs nativas, bibliotecas, licencias, acceso a archivos y rendimiento.
-2. Diseñar navegación y sistema visual; prototipo navegable aprobado antes de completar algoritmos.
-3. Diseñar almacenamiento local, caché, cola por lotes y gestión de espacio.
-4. Implementar importación MP3 y análisis esencial.
-5. Implementar estructura musical y visualizaciones.
-6. Implementar corrección ID3 segura.
-7. Implementar compatibilidad.
-8. Implementar exportación por tonalidad/Camelot y categorías, con pruebas de identidad binaria del audio.
-9. Investigar fuentes públicas para artistas, tracklists y sets.
-10. Implementar descubrimiento de sets y estudio de transiciones.
-11. Pruebas completas en iPad, documentación y distribución de prueba.
+### Repositorio
+- Repositorio: `CA0SC0RP/Analizador-de-musica`
+- URL: https://github.com/CA0SC0RP/Analizador-de-musica
+- Rama base: `main`
+- Rama de esta preparación: `foundation/v1-scope-and-swiftui-shell`
+
+### Decisiones de producto
+
+1. El producto es un analizador y organizador de biblioteca musical local para iPad. No es una aplicación DJ, DAW ni mastering.
+2. La interfaz y la facilidad de trabajo son prioridades centrales, al mismo nivel que la calidad analítica.
+3. La Biblioteca será el centro: ficha de pista, waveform amplio, reproductor integrado, tabla configurable y panel contextual.
+4. Navegación principal: Biblioteca, Análisis, Tonalidades, Organización y Exportación.
+5. Waveform integrado en Biblioteca y Análisis; Energy Map junto al waveform; Frequency Analysis compacto y expandible.
+6. El reproductor solo permite escuchar la pista seleccionada: Play/Pause, seek, posición, duración y volumen. No habrá decks ni mezcla.
+7. V1 incluye importación MP3 por lotes, metadatos, persistencia local, waveform, Energy Map, Frequency Analysis, tonalidad, modo, alternativas, confianza, Camelot, compatibilidad armónica y exportación.
+8. V1 analiza la canción completa; no se impondrán límites arbitrarios de 60 o 180 segundos.
+9. Essentia.js es el candidato principal para evaluación, no una dependencia validada todavía. Hay que probar integración iPadOS, rendimiento y licencia.
+10. Ruta nativa candidata: Swift/SwiftUI, AVFoundation y Accelerate/vDSP.
+11. Exportar es esencial: copiar MP3 originales a carpetas por tonalidad/Camelot y categorías configurables; nunca mover ni recodificar.
+12. Los resultados dudosos se separan para revisión; no se asigna una tonalidad por defecto cuando falla el análisis.
+13. Se necesitan dos MP3 de referencia aportados por el usuario cuando comience la prueba del motor: una pista techno/minimal y otra contrastante. No subirlos al repositorio público.
+
+### Fuera de V1
+
+- Detector BPM, beatgrid, compás y groove.
+- Spectrogram independiente.
+- Análisis avanzado de transiciones, separación de stems, búsqueda de DJ sets y análisis de sesiones.
+- Mastering, EQ correctiva, compresión, normalización, restauración, mejora de audio.
+- Conversión/recodificación, decks, mixer, crossfader y efectos DJ.
+- Compra o descarga de música.
+
+BPM ya presente en metadatos puede mostrarse como dato de origen, sin detector propio.
+
+### Referencias técnicas evaluadas
+
+- Audio AI Dynamics: referencia para Essentia.js y análisis de tonalidad.
+- Neural Frames Song Key Finder: referencia conceptual para cromagrama, perfiles mayor/menor y Camelot.
+- Audio Analysis Studio: referencia de modularidad, no de arquitectura servidor.
+- Camelot AI DJ: ideas de caché, persistencia y análisis incremental.
+- DJ Analyzer: ideas de análisis de energía y espectro; no adoptar sus límites parciales ni fallbacks engañosos.
+
+No se copiará código de estos proyectos sin revisar licencia y necesidad. Las referencias sirven para seleccionar ideas y validar algoritmos.
 
 ### Reglas de trabajo
 
-- Registrar cada decisión, cambio, implementación y evidencia en esta bitácora.
-- Distinguir aprobado, propuesto, implementado y probado.
-- No declarar una función terminada sin pruebas.
-- No asumir gastos sin autorización explícita.
-- No ampliar el producto hacia mastering o funciones DJ.
-- Preservar originales; confirmar cambios ID3.
-- La interfaz y la navegación son requisitos funcionales.
-- La exportación copia y organiza; nunca procesa ni convierte el audio.
+- Procesamiento local como prioridad; ningún gasto/API de pago sin permiso.
+- El usuario conserva la decisión final.
+- Registrar decisiones, cambios y evidencia.
+- Distinguir aprobado, propuesto, implementado, compilado y probado.
+- No declarar un módulo terminado sin pruebas con audio real.
+- Preservar los originales y evitar sobrescrituras.
+- Diseño, navegación, touch y mouse/puntero son requisitos funcionales.
+- Los datos simulados deben identificarse claramente.
 
-### Estado al cierre
+### Estado al registrar esta actualización
 
-**Fase:** definición y documentación.  
-**Implementación:** no iniciada.  
-**Pruebas:** ninguna.  
-**Siguiente hito:** auditoría técnica iPad y prototipo visual/navegable.
+- Alcance V1 redefinido.
+- Rama de preparación creada.
+- Actualización documental y esqueleto SwiftUI en curso.
+- No se ha confirmado todavía una compilación en Xcode ni pruebas en iPad.
+- Siguiente hito: terminar el shell visual de Biblioteca, abrirlo en Xcode/iPad y ajustar diseño antes de integrar el motor de audio.
