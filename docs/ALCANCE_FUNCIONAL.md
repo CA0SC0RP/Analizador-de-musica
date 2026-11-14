@@ -113,7 +113,7 @@ Organizar biblioteca por tonalidad, modo y Camelot; permitir filtros, etiquetas 
 - Decks, mixer, crossfader y efectos DJ.
 - Descarga/compra de música o acceso a cuentas privadas de tiendas.
 
-Un valor BPM presente en metadatos puede mostrarse como dato de origen, sin construir un detector.
+Un valor BPM presente en metadatos puede mostrarse como dato de origen, pero el detector de V1 se probará mediante Apple Music Understanding.
 
 ## 12. Privacidad, coste y honestidad
 
