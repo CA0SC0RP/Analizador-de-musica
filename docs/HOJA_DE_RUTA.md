@@ -12,8 +12,8 @@ La Biblioteca y el entorno visual son el centro del producto. El motor analític
 | 3. Reproductor + waveform | Reproducción local y waveform completo | Audio real, seek y waveform sincronizados |
 | 4. Energy Map | Análisis temporal de energía y eventos tentativos | Visualización con timestamps y confianza |
 | 5. Frequency Analysis | FFT/espectro y bandas | Widget compacto y vista expandida |
-| 6. Tonalidad + Camelot | Essentia.js candidato, cromagrama y métodos de contraste | Análisis de pista completa, alternativas y fallos honestos |
-| 7. Compatibilidad + organización | Relaciones armónicas y filtros | Clasificación explicable |
+| 6. Análisis musical nativo | Apple Music Understanding: tonalidad, ritmo/BPM, beats, estructura, pace, instrumentos y loudness | Resultados temporales persistidos y validados en iPad A16 |
+| 7. Contraste + compatibilidad | Comparar tonalidad Apple con OpenKeyScan/Core ML cuando sea viable; relaciones armónicas y filtros | Discrepancias explicables y clasificación honesta |
 | 8. Exportación | Copia segura de MP3 originales por carpetas | Integridad, conflictos y reanudación probados |
 | 9. Integración y QA | Rendimiento, accesibilidad, memoria, batería y regresiones | Versión V1 probada en iPad |
 
@@ -47,9 +47,9 @@ Ruta candidata:
 - Swift / SwiftUI: interfaz nativa iPadOS.
 - AVFoundation: lectura y reproducción local.
 - Accelerate / vDSP: FFT y operaciones numéricas.
-- Essentia.js: candidato principal para tonalidad y análisis musical; probar integración WebAssembly/JavaScript, rendimiento, consumo y licencia AGPL-3.0/opción propietaria antes de distribuir.
+- Apple Music Understanding: proveedor principal a validar para análisis local. OpenKeyScan: modelo secundario de tonalidad; evaluar conversión PyTorch→Core ML y licencia de pesos/datasets. Sonovault: catálogo remoto opcional, sin subir audio.
 - aubio, librosa y otros motores: referencias o alternativas para validar algoritmos; no agregar dependencias sin necesidad.
-- FFmpeg solo si las APIs nativas no cubren una necesidad real.
+- FFmpeg solo si las APIs nativas no cubren una necesidad real. SwiftData/SQLite para biblioteca y resultados.
 
 Medir compatibilidad iPadOS, CPU/RAM, tamaño, tiempo de análisis de pistas completas, batería, precisión en música electrónica, recuperación de errores y obligaciones de licencia. No contratar servicios ni asumir costes sin autorización.
 
@@ -64,3 +64,16 @@ Usar ambos archivos para importación, metadatos, duración, decodificación, wa
 ## Criterio de calidad
 
 Por cada módulo: diseño definido → implementación → prueba con audio real → integración → evidencia registrada en bitácora. Distinguir siempre planificado, implementado, compilado, probado y aprobado. No declarar V1 lista solo porque la interfaz o una pantalla de demostración funcione.
+
+
+## Actualización de secuencia técnica — 2026-11-14
+
+1. Crear un proyecto mínimo SwiftUI para iPadOS 27, importar un MP3 con el selector de archivos y reproducirlo con AVFoundation.
+2. Integrar Apple Music Understanding en una pantalla de prueba: solicitar Key, Rhythm, Structure, Pace, Instrument Activity y Loudness; guardar JSON bruto y medir duración/memoria.
+3. Construir waveform y Frequency Analysis con Accelerate/vDSP, sin alterar el archivo fuente.
+4. Persistir resultados normalizados en la base local y crear la capa de compatibilidad Camelot.
+5. Comparar la tonalidad de Apple con OpenKeyScan en desarrollo; intentar Core ML solo si las discrepancias justifican la integración.
+6. Añadir Energy Map combinando Pace, loudness y rasgos espectrales/temporales; no convertir Pace directamente en porcentaje de energía ni Groove.
+7. Implementar compatibilidad, organización y copia/exportación segura.
+
+Sonovault queda fuera del camino crítico y desactivado por defecto. No se requiere un servidor, Codespaces permanente ni servicio de pago para ejecutar el análisis final.
