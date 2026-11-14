@@ -41,9 +41,9 @@ Dirección visual: consola oscura profesional, clara y atractiva, con informaci�
 
 ## Fuera de V1
 
-BPM como detector, beatgrid, compás y groove; Spectrogram como vista independiente; análisis avanzado de transiciones; separación de stems; búsqueda de DJ sets y coincidencias en sesiones; mastering, EQ correctiva, compresión, normalización, restauración o mejora de audio; decks, mixer, crossfader y efectos DJ; conversión o recodificación de audio; compra o descarga de música.
+Groove como métrica independiente y validada; Spectrogram como vista independiente; análisis avanzado de transiciones; separación de stems; búsqueda de DJ sets y coincidencias en sesiones; mastering, EQ correctiva, compresión, normalización, restauración o mejora de audio; decks, mixer, crossfader y efectos DJ; conversión o recodificación de audio; compra o descarga de música.
 
-Un BPM ya incluido en metadatos puede mostrarse como dato de origen, pero no se desarrollará un detector BPM en V1.
+BPM, posiciones de beats y límites de compás pasan a ser funciones candidatas de V1 mediante Apple Music Understanding. Se habilitarán tras validar resultados y rendimiento en el iPad A16; no se asumirá que equivalen a un beatgrid DJ editable.
 
 ## Exportación de MP3
 
@@ -51,7 +51,7 @@ La exportación es una función esencial. Copiará los MP3 originales a una carp
 
 ## Tecnología candidata
 
-Ruta principal a evaluar: Swift y SwiftUI para la aplicación nativa; AVFoundation para acceso/reproducción de audio; Accelerate/vDSP para operaciones numéricas y espectrales. **Apple Music Understanding** pasa a ser el primer motor candidato para probar: ofrece análisis local de tonalidad por rangos, estructura, pace, actividad instrumental y loudness. Su documentación indica iPadOS 27.0 o posterior y está marcada como Beta; falta validar compilación y ejecución en el iPad A16. Essentia y librosa quedan como referencias comparativas y alternativas, no como dependencias principales.
+Ruta principal a evaluar: Swift y SwiftUI para la aplicación nativa; AVFoundation para acceso/reproducción de audio; Accelerate/vDSP para operaciones numéricas y espectrales. **Apple Music Understanding** pasa a ser el primer motor candidato para probar: ofrece análisis local de tonalidad por rangos, estructura, pace, actividad instrumental y loudness. Su documentación indica iPadOS 27.0 o posterior y está marcada como Beta; falta validar compilación y ejecución en el iPad A16. OpenKeyScan será candidato secundario para contrastar tonalidad; su modelo PyTorch podría requerir conversión a Core ML. Librosa, Essentia, aubio y PyWavelets quedan como referencias o alternativas selectivas, no como dependencias automáticas.
 
 No se incorporarán dependencias o servicios de pago sin autorización explícita. Se priorizará procesamiento local.
 
@@ -74,3 +74,14 @@ Antes de validar el motor se solicitarán dos MP3 de referencia: una pista de el
 La definición V1 y el primer esqueleto de interfaz SwiftUI se preparan en la rama de fundación. El código inicial no debe considerarse compilado ni probado hasta que se ejecute en Xcode sobre un iPad.
 
 Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Motor Apple Music Understanding](docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md) · [Carpeta de muestras locales](samples/reference-audio/README.md)
+
+
+## Actualización tecnológica — 2026-11-14
+
+- Arquitectura objetivo: aplicación nativa Swift/SwiftUI para iPadOS; AVFoundation para importar, decodificar y reproducir; Accelerate/vDSP para waveform, FFT y características espectrales; SwiftData o SQLite para persistencia local (decisión tras prototipo).
+- Apple Music Understanding es el primer proveedor analítico: análisis on-device y offline. Es Beta y su disponibilidad documentada comienza en iPadOS 27.0. El iPad A16 con iPadOS 27.3 supera el mínimo de versión, pero el soporte/rendimiento concreto debe probarse.
+- BPM/ritmo y beats pasan a evaluación V1. Pace no equivale a una puntuación universal de energía ni a Groove; el Energy Map combinará medidas temporales propias con Pace y loudness, explicando cada dimensión.
+- OpenKeyScan (código MIT según su repositorio) queda como referencia y motor de contraste de tonalidad. Su API REST local requiere la aplicación de escritorio y no es una API remota para iPad. Revisar por separado licencia/procedencia de pesos y datasets antes de portar el modelo.
+- Sonovault es una fuente externa opcional de metadatos/BPM/tonalidad por artista+título, ISRC o ID de plataforma. No analiza el archivo local; requiere Internet y API key. El plan gratuito anunciado es de 1,000 solicitudes/mes, sujeto a cambios. No será dependencia ni se usará sin autorización.
+- Los MP3 originales nunca se suben para análisis. La consulta de catálogo solo usa identificadores/metadatos cuando el usuario habilite expresamente esa función.
+- La base local conservará resultados por proveedor, timestamps, versión del motor, parámetros, confianza disponible y procedencia; discrepancias no se sobrescriben ni se ocultan.
