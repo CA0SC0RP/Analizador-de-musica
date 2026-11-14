@@ -87,3 +87,16 @@ No se copiará código de estos proyectos sin revisar licencia y necesidad. Las 
 - Actualización documental y esqueleto SwiftUI en curso.
 - No se ha confirmado todavía una compilación en Xcode ni pruebas en iPad.
 - Siguiente hito: terminar el shell visual de Biblioteca, abrirlo en Xcode/iPad y ajustar diseño antes de integrar el motor de audio.
+
+
+## 2026-11-14 — Consolidación tecnológica y decisión de comenzar prototipo nativo
+
+- Se consolida Swift/SwiftUI como arquitectura objetivo de la aplicación iPadOS; AVFoundation para importación/decodificación/reproducción y Accelerate/vDSP para waveform y análisis espectral.
+- Apple Music Understanding pasa a proveedor analítico principal del prototipo. La documentación oficial describe tonalidad por rangos, ritmo/BPM, beats, compases, estructura, pace, actividad instrumental y loudness, ejecutados on-device. Requiere iPadOS 27.0+ y está en Beta.
+- El iPad del usuario informa iPadOS 27.3: supera el mínimo de versión documentado. La ejecución y rendimiento en A16 siguen pendientes de prueba con Xcode 27 y el SDK correspondiente.
+- BPM/ritmo y posiciones de beats pasan a evaluación V1; no se asumirá que equivalen a un beatgrid DJ editable. Groove queda fuera como métrica separada hasta disponer de una definición validable.
+- OpenKeyScan se clasifica como motor de contraste de tonalidad, no como aplicación base. El repositorio declara MIT; la licencia/procedencia de checkpoint, pesos y datasets debe auditarse por separado. Su API REST local (localhost:58721) solo funciona junto con la aplicación de escritorio, no es una API remota para iPad.
+- Se documenta Sonovault como fuente externa opcional de BPM/tonalidad por metadatos/ISRC/ID de plataforma. No analiza los MP3 del usuario; sus datos provienen de su catálogo. El plan gratuito anunciado es 1,000 solicitudes mensuales, requiere API key y queda desactivado por defecto.
+- Se establece persistencia local con procedencia por proveedor, motor/versión, timestamp, rangos temporales, confianza cuando exista y conservación de discrepancias.
+- Se mantiene la regla: no subir MP3 personales a GitHub ni a servicios externos; no alterar ni recodificar originales; no asumir costes.
+- Estado: documentación actualizada. No se ha compilado ni ejecutado todavía la app; el siguiente paso es un prototipo SwiftUI mínimo que importe y reproduzca un MP3 y ejecute Music Understanding en el iPad.
