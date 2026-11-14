@@ -644,7 +644,8 @@ private struct TransitionLane: View {
                 amplitudes: track.waveform,
                 tint: tint,
                 markerPosition: markerPosition,
-                markerTint: DemoPalette.amber
+                markerTint: DemoPalette.amber,
+                highlightRange: max(0, markerPosition - 0.11)...min(1, markerPosition + 0.11)
             )
             .frame(height: 72)
 
@@ -722,6 +723,7 @@ private struct WaveformPlot: View {
     let tint: Color
     var markerPosition: CGFloat? = nil
     var markerTint: Color = .white
+    var highlightRange: ClosedRange<CGFloat>? = nil
 
     var body: some View {
         GeometryReader { geometry in
@@ -743,6 +745,15 @@ private struct WaveformPlot: View {
                         let path = Path(roundedRect: rect, cornerRadius: barWidth / 2)
                         context.fill(path, with: .color(tint.opacity(0.92)))
                     }
+                }
+
+                if let highlightRange {
+                    let start = min(max(0, highlightRange.lowerBound), 1) * geometry.size.width
+                    let end = min(max(0, highlightRange.upperBound), 1) * geometry.size.width
+                    Rectangle()
+                        .fill(markerTint.opacity(0.14))
+                        .frame(width: max(0, end - start))
+                        .offset(x: start)
                 }
 
                 if let markerPosition {
