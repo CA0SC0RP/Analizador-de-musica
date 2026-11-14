@@ -85,3 +85,7 @@ Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](doc
 - Sonovault es una fuente externa opcional de metadatos/BPM/tonalidad por artista+título, ISRC o ID de plataforma. No analiza el archivo local; requiere Internet y API key. El plan gratuito anunciado es de 1,000 solicitudes/mes, sujeto a cambios. No será dependencia ni se usará sin autorización.
 - Los MP3 originales nunca se suben para análisis. La consulta de catálogo solo usa identificadores/metadatos cuando el usuario habilite expresamente esa función.
 - La base local conservará resultados por proveedor, timestamps, versión del motor, parámetros, confianza disponible y procedencia; discrepancias no se sobrescriben ni se ocultan.
+
+
+### Desarrollo directamente en iPad
+Swift Playgrounds permite crear y ejecutar proyectos de aplicación SwiftUI desde el propio iPad. Se evaluará como entorno inicial para construir el prototipo sin depender de un Mac. La disponibilidad del módulo Beta MusicUnderstanding dentro de la versión instalada de Swift Playgrounds debe comprobarse con una prueba de importación/compilación. Xcode 27 requiere un Mac con macOS Tahoe 26.6 o posterior, por lo que no será un requisito para el primer prototipo si Playgrounds expone las APIs necesarias.
