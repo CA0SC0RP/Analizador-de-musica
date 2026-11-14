@@ -1,7 +1,7 @@
 # Evaluación de motor: Apple Music Understanding
 
-Fecha: 2026-11-02  
-Estado: candidato prioritario para prototipo; todavía no validado en el iPad del usuario.
+Fecha de actualización: 2026-11-14  
+Estado: proveedor principal seleccionado para prototipo; ejecución real en iPad A16 aún pendiente.
 
 ## Hallazgos oficiales
 
@@ -25,12 +25,12 @@ La API permite solicitar solo los análisis necesarios, cancelar tareas y obtene
 - La documentación del framework y del ejemplo está marcada como Beta; la API puede cambiar.
 - Apple no publica en la documentación consultada una lista específica de chips iPad compatibles ni una garantía de rendimiento para el iPad A16.
 - No se debe confundir este framework con Apple Intelligence: no se encontró un requisito oficial que indique que Music Understanding dependa de Apple Intelligence o de sus modelos/dispositivos compatibles.
-- La compatibilidad real del iPad A16 debe verificarse compilando con el SDK apropiado y ejecutando un análisis de MP3 en el dispositivo.
+- El iPad del usuario informa iPadOS 27.3, superior al mínimo documentado 27.0. Esto confirma compatibilidad de versión, no garantiza soporte del framework en el chip A16 ni rendimiento; se debe compilar con Xcode 27/SDK correspondiente y ejecutar una prueba real.
 - Para compilar se necesitará Xcode/macOS con el SDK que incluya MusicUnderstanding. Codespaces Linux puede preparar pruebas auxiliares, pero no sustituye Xcode.
 
 ## Encaje en el alcance del analizador
 
-Music Understanding cubre directamente varios requisitos de V1: tonalidad por rangos, estructura musical, actividad instrumental, pace y loudness. Aunque también ofrece ritmo/BPM, el producto V1 no desarrollará detector BPM ni beatgrid; esos resultados se dejarán desactivados o no se expondrán en la interfaz de V1.
+Music Understanding cubre directamente varios requisitos de V1: tonalidad por rangos, estructura musical, actividad instrumental, pace y loudness. El framework también ofrece ritmo/BPM, posiciones de beats y límites de compás; estas salidas se incorporan a la evaluación de V1. Se verificará si son suficientemente estables para mostrar un beatgrid útil, sin prometer controles de beatgrid DJ que el framework no documenta.
 
 Pace puede alimentar el Energy Map, pero no debe presentarse como una medida universal de energía ni confundirse con LUFS. Loudness y el análisis espectral son dimensiones distintas. El framework no documenta un resultado FFT/espectro que sustituya nuestro Frequency Analysis; esa visualización seguirá siendo nativa con Accelerate/vDSP. El waveform también se generará desde el audio decodificado.
 
@@ -59,3 +59,23 @@ Music Understanding es un framework del SDK de Apple, no una biblioteca open sou
 ## Criterio de aceptación
 
 No declarar el motor integrado ni compatible hasta compilar y ejecutar en el iPad A16 una pista MP3 completa, obtener resultados no vacíos de las dimensiones requeridas, comprobar timestamps, cancelar/reanudar cuando corresponda y registrar tiempos/errores. Si el dispositivo o el SDK no son compatibles, activar el plan alternativo nativo.
+
+
+## Decisión actualizada — 2026-11-14
+
+Apple Music Understanding será el primer motor real que integremos. Su alcance cubre buena parte del análisis que antes habría requerido combinar varios paquetes de Python. La aplicación seguirá siendo Swift/SwiftUI y el análisis se ejecutará localmente.
+
+### Qué no resuelve
+- No documenta una salida Camelot/Open Key: convertir tonalidad+modo a Camelot será lógica propia.
+- Pace describe impulso/energía percibidos en eventos por minuto; no es Groove ni una escala porcentual universal.
+- Loudness (LUFS/peak) no equivale a energía musical ni a análisis de frecuencias.
+- No sustituye waveform ni FFT/espectro: se implementarán con AVFoundation y Accelerate/vDSP.
+- Las etiquetas estructurales no deben traducirse automáticamente a Intro/Build/Break/Drop sin validación específica en techno y house.
+
+### Criterio de prueba en el iPad A16
+1. Abrir MP3 completo desde Files mediante `AVURLAsset`.
+2. Solicitar Key, Rhythm, Structure, Pace, Instrument Activity y Loudness.
+3. Comprobar rangos temporales, BPM, beats, modo y datos no vacíos.
+4. Registrar tiempo total, memoria máxima, estabilidad y consumo.
+5. Repetir con una pista techno/minimal y una pista contrastante.
+6. Registrar diferencias frente a referencias externas/segundo motor sin sustituir automáticamente el resultado local.
