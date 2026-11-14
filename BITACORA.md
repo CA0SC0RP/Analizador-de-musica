@@ -102,3 +102,16 @@ No se copiará código de estos proyectos sin revisar licencia y necesidad. Las 
 - Estado: documentación actualizada. No se ha compilado ni ejecutado todavía la app; el siguiente paso es un prototipo SwiftUI mínimo que importe y reproduzca un MP3 y ejecute Music Understanding en el iPad.
 
 - Ruta de desarrollo adicional: Swift Playgrounds permite crear apps SwiftUI directamente en iPad y se evaluará para evitar depender de un Mac. Falta comprobar si su SDK incluye el framework Beta MusicUnderstanding. Xcode 27 requiere macOS Tahoe 26.6 o posterior; no se asume que el MacBook 2012 pueda ejecutarlo.
+
+
+## 2026-11-14 — Primer prototipo visual iPad
+
+- Se verificó el estado de `main`: documentación V1 y dirección SwiftUI ya estaban consolidadas; el repositorio no mostraba un archivo de interfaz SwiftUI en las rutas de aplicación habituales consultadas.
+- Se creó la rama `prototype/ipad-visual-shell` desde `main`, sin modificar la rama principal.
+- Se añadió `docs/PROTOTIPO_VISUAL_IPAD.md` con la distribución de Biblioteca, la vista comparativa A/B, marcadores de salida/entrada, ventana sugerida, estados y criterios de aceptación.
+- Se añadió `prototype/ContentView.swift`: shell SwiftUI navegable con Biblioteca, ficha de pista, waveforms simuladas, tabla, inspector y comparación de dos pistas. Los selectores y la navegación funcionan dentro de la demostración.
+- Se añadió `prototype/README.md` con instrucciones para probar el archivo en Swift Playgrounds.
+- Todos los datos del prototipo son ficticios y están identificados como demostración. No importa ni reproduce MP3, no analiza audio y no calcula compatibilidad real.
+- No se subieron MP3 ni se añadieron servicios, API o dependencias de pago.
+- Estado: diseño definido y shell visual preparado; compilación, ejecución en Swift Playgrounds y validación en iPad A16 pendientes.
+- Siguiente hito: abrir el shell en Swift Playgrounds del iPad, resolver cualquier error de compilación y ajustar la distribución horizontal/vertical antes de conectar importación y audio local.
