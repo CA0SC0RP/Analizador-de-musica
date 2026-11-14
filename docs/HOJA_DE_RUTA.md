@@ -81,3 +81,14 @@ Sonovault queda fuera del camino crítico y desactivado por defecto. No se requi
 
 ## Entorno de desarrollo sin Mac
 Apple documenta que Swift Playgrounds en iPad permite crear, editar, ejecutar y compartir aplicaciones SwiftUI, incorporar archivos Swift y paquetes, y acceder a frameworks de las plataformas Apple. Se usará como primera opción para el prototipo local. La disponibilidad del framework Beta MusicUnderstanding en el SDK embebido de la versión instalada de Playgrounds no está confirmada: primer test = `import MusicUnderstanding` y compilación mínima. Xcode 27 requiere macOS Tahoe 26.6 o posterior; si la API Beta no está disponible en Playgrounds, habrá que usar un Mac compatible para esa fase o diseñar un proveedor alternativo.
+
+
+## Extensión posterior a V1 — comparación y generación de sets
+
+Estas funciones se diseñan desde ahora para que la arquitectura pueda incorporarlas, pero no retrasan la primera biblioteca funcional:
+
+1. **Comparación visual de transición:** seleccionar A y B, mostrar waveforms completas o regiones relevantes, marcadores estimados de salida/entrada y límites de frase cuando estén validados. Explicar armonía, tempo, ritmo, estructura, energía y confianza.
+2. **Alternativas de transición:** ordenar candidatas y explicar por qué cada una puede funcionar o qué incertidumbre presenta.
+3. **Generador de sets:** representar canciones como nodos y transiciones como conexiones ponderadas; buscar secuencias según progresión de energía, coherencia tonal, tempo y estructura. Proponer más de una ruta cuando proceda.
+
+La vista A/B no será un mixer ni dos decks: es una herramienta de análisis y planificación. Los marcadores son estimaciones, no garantías de una mezcla musicalmente correcta. El generador se implementará solo después de validar análisis y compatibilidad con música real.
