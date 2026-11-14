@@ -68,7 +68,7 @@ Por cada módulo: diseño definido → implementación → prueba con audio real
 
 ## Actualización de secuencia técnica — 2026-11-14
 
-1. Crear un proyecto mínimo SwiftUI para iPadOS 27, importar un MP3 con el selector de archivos y reproducirlo con AVFoundation.
+1. Crear un App Playground SwiftUI directamente en el iPad, importar un MP3 con el selector de archivos y reproducirlo con AVFoundation. Probar si la versión instalada expone MusicUnderstanding; si no, separar el prototipo UI/audio del módulo analítico hasta disponer de SDK compatible. Xcode 27 en Mac queda como alternativa, no requisito inicial.
 2. Integrar Apple Music Understanding en una pantalla de prueba: solicitar Key, Rhythm, Structure, Pace, Instrument Activity y Loudness; guardar JSON bruto y medir duración/memoria.
 3. Construir waveform y Frequency Analysis con Accelerate/vDSP, sin alterar el archivo fuente.
 4. Persistir resultados normalizados en la base local y crear la capa de compatibilidad Camelot.
@@ -77,3 +77,7 @@ Por cada módulo: diseño definido → implementación → prueba con audio real
 7. Implementar compatibilidad, organización y copia/exportación segura.
 
 Sonovault queda fuera del camino crítico y desactivado por defecto. No se requiere un servidor, Codespaces permanente ni servicio de pago para ejecutar el análisis final.
+
+
+## Entorno de desarrollo sin Mac
+Apple documenta que Swift Playgrounds en iPad permite crear, editar, ejecutar y compartir aplicaciones SwiftUI, incorporar archivos Swift y paquetes, y acceder a frameworks de las plataformas Apple. Se usará como primera opción para el prototipo local. La disponibilidad del framework Beta MusicUnderstanding en el SDK embebido de la versión instalada de Playgrounds no está confirmada: primer test = `import MusicUnderstanding` y compilación mínima. Xcode 27 requiere macOS Tahoe 26.6 o posterior; si la API Beta no está disponible en Playgrounds, habrá que usar un Mac compatible para esa fase o diseñar un proveedor alternativo.
