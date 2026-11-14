@@ -73,7 +73,7 @@ Antes de validar el motor se solicitarán dos MP3 de referencia: una pista de el
 
 La definición V1 y el primer esqueleto SwiftUI se preparan en la rama de fundación. El código no debe considerarse compilado ni probado hasta ejecutarlo en Swift Playgrounds sobre el iPad o en Xcode con un dispositivo.
 
-Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Motor Apple Music Understanding](docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md) · [OpenKeyScan y Sonovault](docs/OPENKEYSCAN_Y_SONOVAULT.md) · [Modelo de datos V1](docs/MODELO_DATOS_V1.md) · [Carpeta de muestras locales](samples/reference-audio/README.md)
+Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](docs/HOJA_DE_RUTA.md) · [Prototipo visual iPad](docs/PROTOTIPO_VISUAL_IPAD.md) · [Motor Apple Music Understanding](docs/MOTOR_APPLE_MUSIC_UNDERSTANDING.md) · [Bitácora](BITACORA.md) · [Plan de pruebas MP3](docs/PRUEBAS_MP3.md) · [OpenKeyScan y Sonovault](docs/OPENKEYSCAN_Y_SONOVAULT.md) · [Modelo de datos V1](docs/MODELO_DATOS_V1.md) · [Shell SwiftUI](prototype/ContentView.swift) · [Instrucciones del prototipo](prototype/README.md) · [Carpeta de muestras locales](samples/reference-audio/README.md)
 
 
 ## Actualización tecnológica — 2026-11-14
@@ -89,3 +89,7 @@ Documentos: [Alcance funcional](docs/ALCANCE_FUNCIONAL.md) · [Hoja de ruta](doc
 
 ### Desarrollo directamente en iPad
 Swift Playgrounds permite crear y ejecutar proyectos de aplicación SwiftUI desde el propio iPad. Se evaluará como entorno inicial para construir el prototipo sin depender de un Mac. La disponibilidad del módulo Beta MusicUnderstanding dentro de la versión instalada de Swift Playgrounds debe comprobarse con una prueba de importación/compilación. Xcode 27 requiere un Mac con macOS Tahoe 26.6 o posterior, por lo que no será un requisito para el primer prototipo si Playgrounds expone las APIs necesarias.
+
+
+### Prototipo visual inicial — 2026-11-14
+Se abrió la rama `prototype/ipad-visual-shell` desde `main`. Incluye la definición de la Biblioteca y la comparación visual de transición, además de un primer shell SwiftUI con datos simulados. La importación, reproducción, análisis y compatibilidad reales todavía no están conectados; el código no se considera compilado ni probado en el iPad.
