@@ -81,11 +81,11 @@ El reproductor integrado solo sirve para escuchar y revisar la pista seleccionad
 - No asignar una tonalidad por defecto cuando el análisis falla; devolver desconocido/ambiguo.
 - Explicar compatibilidad armónica y relaciones, sin tratar Camelot como regla infalible.
 
-Apple Music Understanding es el primer motor candidato aprobado para evaluación. La documentación indica iPadOS 27.0 o posterior y está marcada como Beta. Se debe validar compilación y ejecución real en el iPad A16 antes de adoptarlo. Cubre tonalidad por rangos, estructura, pace, actividad instrumental y loudness; no sustituye el waveform ni el análisis espectral propio, y no se usará su salida de ritmo/BPM en V1. Essentia y librosa quedan como motores de comparación/alternativa, no como dependencias principales.
+Apple Music Understanding es el proveedor analítico principal para el prototipo V1. La documentación oficial indica iPadOS 27.0 o posterior y el framework está en Beta. El iPad del usuario ejecuta iPadOS 27.3, por lo que cumple el mínimo de versión documentado; el soporte y rendimiento concretos del A16 deben validarse en dispositivo. Cubre tonalidad por rangos, estructura, pace, actividad instrumental y loudness; no sustituye el waveform ni el análisis espectral propio, y se evaluará también su salida de ritmo, BPM, posiciones de beats y límites de compás para V1. No se asumirá que esto equivale a un beatgrid DJ editable. Essentia y librosa quedan como motores de comparación/alternativa, no como dependencias principales.
 
 ## 9. Organización y compatibilidad
 
-Organizar biblioteca por tonalidad, modo y Camelot; permitir filtros, etiquetas y categorías configurables. La compatibilidad entre pistas debe explicar la relación armónica y señalar incertidumbre. No se desarrollará un motor de BPM ni beatgrid en V1.
+Organizar biblioteca por tonalidad, modo y Camelot; permitir filtros, etiquetas y categorías configurables. La compatibilidad entre pistas debe explicar la relación armónica y señalar incertidumbre. El BPM, las posiciones de beats y los límites de compás se obtendrán primero del framework de Apple. Si sus resultados no cumplen la precisión necesaria, se evaluará un proveedor rítmico alternativo.
 
 ## 10. Exportación de MP3 originales
 
@@ -103,7 +103,7 @@ Organizar biblioteca por tonalidad, modo y Camelot; permitir filtros, etiquetas 
 
 ## 11. Exclusiones de V1
 
-- Detector BPM, beatgrid, compás y groove.
+- Groove como métrica independiente; análisis avanzado de beatgrid editable y herramientas de alineación DJ.
 - Spectrogram como vista independiente.
 - Análisis automático avanzado de transiciones.
 - Separación de stems.
@@ -118,9 +118,24 @@ Un valor BPM presente en metadatos puede mostrarse como dato de origen, sin cons
 ## 12. Privacidad, coste y honestidad
 
 - Procesamiento local como prioridad.
-- No exigir cuentas ni servicios de IA/API externos.
+- No exigir cuentas ni servicios de IA/API externos. Sonovault podrá evaluarse solo como consulta opcional de catálogo, nunca como requisito.
 - Ningún gasto, suscripción o API comercial sin autorización explícita.
 - Diferenciar mediciones, estimaciones, metadatos y datos externos.
 - No afirmar exactitud perfecta; mostrar incertidumbre y fallos.
 - El usuario conserva la decisión final.
 - Una función solo se declara terminada después de pruebas reales, documentación y verificación en iPad.
+
+
+## 13. Actualización de motores y servicios (2026-11-14)
+
+### Proveedor principal local
+Apple Music Understanding: análisis on-device de Key (tonalidad por rangos), Rhythm (BPM, posiciones de beats y compases), Structure (secciones/segmentos/frases), Pace (energía/impulso percibidos), Instrument Activity y Loudness (mediciones ITU-R BS.1770). Se accede mediante `MusicUnderstandingSession` con `AVAsset` o buffers PCM. El framework está en Beta; se validará con una app mínima SwiftUI en el iPad A16.
+
+### Proveedor de contraste tonal
+OpenKeyScan: detector CNN que procesa CQT y clasifica 24 tonalidades (12 mayores y 12 menores), con salidas Camelot/Open Key. El código declara MIT, pero pesos, checkpoint y datasets requieren auditoría independiente. La API REST (`localhost:58721`) pertenece a la aplicación de escritorio; no es la interfaz de integración para iPadOS. Para usar el modelo en iPad, estudiar conversión PyTorch→Core ML y comparar predicciones con Apple.
+
+### Consulta externa opcional
+Sonovault puede devolver BPM y tonalidad de canciones identificadas por artista+título, ISRC o ID de plataforma. No recibe ni analiza nuestros MP3 locales: devuelve mediciones que el proveedor ya realizó sobre su catálogo con OpenKeyScan y el detector de Lexicon DJ. Requiere conexión y API key; el nivel gratuito anunciado es 1,000 solicitudes/mes. Solo se usará como evidencia externa opcional, con coincidencia confirmada y permiso del usuario.
+
+### Reglas de procedencia
+Cada valor guardará `source_type` (local_framework, local_model, embedded_tag, external_catalog o derived), `provider`, `engine_version`, `analysis_timestamp`, `time_range`, `confidence` si existe y estado de validación. Resultados discordantes se conservarán como observaciones separadas; no se promediarán tonalidades ni se elegirá una sin criterio documentado.
