@@ -26,7 +26,7 @@ La API permite solicitar solo los análisis necesarios, cancelar tareas y obtene
 - Apple no publica en la documentación consultada una lista específica de chips iPad compatibles ni una garantía de rendimiento para el iPad A16.
 - No se debe confundir este framework con Apple Intelligence: no se encontró un requisito oficial que indique que Music Understanding dependa de Apple Intelligence o de sus modelos/dispositivos compatibles.
 - El iPad del usuario informa iPadOS 27.3, superior al mínimo documentado 27.0. Esto confirma compatibilidad de versión, no garantiza soporte del framework en el chip A16 ni rendimiento; se debe compilar con Xcode 27/SDK correspondiente y ejecutar una prueba real.
-- Para compilar se necesitará Xcode/macOS con el SDK que incluya MusicUnderstanding. Codespaces Linux puede preparar pruebas auxiliares, pero no sustituye Xcode.
+- La vía de desarrollo completa y documentada es Xcode 27 en un Mac con macOS Tahoe 26.6 o posterior. Sin embargo, Swift Playgrounds para iPad permite crear y ejecutar apps SwiftUI y acceder a frameworks de Apple; por ello se probará primero si la versión instalada expone `MusicUnderstanding`. La documentación pública de Playgrounds confirma el soporte general de frameworks, pero no garantiza que el framework Beta esté incluido en su SDK. Codespaces Linux puede preparar archivos y documentación, pero no compila ni depura una app iPadOS nativa.
 
 ## Encaje en el alcance del analizador
 
@@ -79,3 +79,7 @@ Apple Music Understanding será el primer motor real que integremos. Su alcance 
 4. Registrar tiempo total, memoria máxima, estabilidad y consumo.
 5. Repetir con una pista techno/minimal y una pista contrastante.
 6. Registrar diferencias frente a referencias externas/segundo motor sin sustituir automáticamente el resultado local.
+
+
+## Ruta de desarrollo desde el propio iPad
+El usuario no dispone de un Mac moderno para Xcode. Swift Playgrounds es una alternativa oficial para crear App Playgrounds SwiftUI directamente en iPad y añadir archivos Swift/paquetes. Primer experimento: crear un proyecto mínimo e intentar `import MusicUnderstanding`. Si compila, ejecutar el análisis de un MP3 en el iPad. Si el módulo no está disponible en el SDK de Playgrounds, la interfaz, importación y reproductor pueden avanzar por separado, pero la integración de Music Understanding requerirá Xcode 27 en Mac compatible o una ruta alternativa que sí pueda compilarse.
