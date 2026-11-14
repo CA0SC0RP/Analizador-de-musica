@@ -100,3 +100,5 @@ No se copiará código de estos proyectos sin revisar licencia y necesidad. Las 
 - Se establece persistencia local con procedencia por proveedor, motor/versión, timestamp, rangos temporales, confianza cuando exista y conservación de discrepancias.
 - Se mantiene la regla: no subir MP3 personales a GitHub ni a servicios externos; no alterar ni recodificar originales; no asumir costes.
 - Estado: documentación actualizada. No se ha compilado ni ejecutado todavía la app; el siguiente paso es un prototipo SwiftUI mínimo que importe y reproduzca un MP3 y ejecute Music Understanding en el iPad.
+
+- Ruta de desarrollo adicional: Swift Playgrounds permite crear apps SwiftUI directamente en iPad y se evaluará para evitar depender de un Mac. Falta comprobar si su SDK incluye el framework Beta MusicUnderstanding. Xcode 27 requiere macOS Tahoe 26.6 o posterior; no se asume que el MacBook 2012 pueda ejecutarlo.
